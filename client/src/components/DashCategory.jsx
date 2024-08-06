@@ -7,6 +7,7 @@ export default function DashCategory() {
   const { currentUser } = useSelector((state) => state.user);
   const [userCategory, setUserCategory] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [categoryIdToDelete, setCategoryIdToDelete] = useState('');
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -26,6 +27,29 @@ export default function DashCategory() {
       fetchCategory();
     }
   }, [currentUser, currentUser._id]);
+
+  const handleDeleteCategory = async () => {
+    setShowModal(false);
+    try {
+      const res = await fetch(
+        `/api/category/deletecategory/${categoryIdToDelete}/${currentUser._id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        setUserCategory((prev) =>
+          prev.filter((category) => category._id !== categoryIdToDelete)
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
@@ -67,7 +91,10 @@ export default function DashCategory() {
                       {category.name}
                   </Table.Cell>
                   <Table.Cell>
-                    <span onClick={() => setShowModal(true)}>
+                    <span onClick={() => {
+                        setShowModal(true);
+                        setCategoryIdToDelete(category._id);
+                      }}>
                       Delete
                     </span>
                   </Table.Cell>
@@ -96,11 +123,12 @@ export default function DashCategory() {
         <Modal.Header />
         <Modal.Body>
           <div className='text-center'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
               Are you sure you want to delete this category?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={() => setShowModal(false)}>
+              <Button color='failure' onClick={handleDeleteCategory}>
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
