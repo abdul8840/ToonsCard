@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import AllCards from './pages/AllCards';
 import 'flowbite/dist/flowbite.css';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return (
@@ -16,7 +17,9 @@ const App = () => {
       <Route path='/' element={<Home />} />
       <Route path='/sign-in' element={<SignIn />} />
       <Route path='/sign-up' element={<SignUp />} />
-      <Route path='/dashboard' element={<Dashboard />} />
+      <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
       <Route path='/all-cards' element={<AllCards />} />
     </Routes>
     </BrowserRouter>
