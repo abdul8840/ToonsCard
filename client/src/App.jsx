@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import AllCards from './pages/AllCards';
+import 'flowbite/dist/flowbite.css';
 
 const App = () => {
   return (
