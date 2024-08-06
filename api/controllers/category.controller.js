@@ -22,23 +22,9 @@ export const create = async (req, res, next) => {
 
 export const getcategory = async (req, res, next) => {
   try {
-    const startIndex = parseInt(req.query.startIndex) || 0;
-    const limit = parseInt(req.query.limit) || 9;
-    const sortDirection = req.query.order === 'asc' ? 1 : -1;
-    const category = await Category.find({
-      ...(req.query.userId && { userId: req.query.userId }),
-      ...(req.query.slug && { slug: req.query.slug }),
-      ...(req.query.categoryId && { _id: req.query.categoryId }),
-      ...(req.query.searchTerm && {
-        $or: [
-          { name: { $regex: req.query.searchTerm, $options: 'i' } },
-        ],
-      }),
-    })
-      .sort({ updatedAt: sortDirection })
-      .skip(startIndex)
-      .limit(limit);
-
+    const category = await Category.find().sort({
+      createdAt: -1
+    });
     const totalCategory = await Category.countDocuments();
 
     const now = new Date();
