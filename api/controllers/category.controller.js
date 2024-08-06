@@ -25,8 +25,9 @@ export const getcategory = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.order === 'asc' ? 1 : -1;
-    const categories = await Category.find({
+    const category = await Category.find({
       ...(req.query.userId && { userId: req.query.userId }),
+      ...(req.query.slug && { slug: req.query.slug }),
       ...(req.query.categoryId && { _id: req.query.categoryId }),
       ...(req.query.searchTerm && {
         $or: [
@@ -48,14 +49,14 @@ export const getcategory = async (req, res, next) => {
       now.getDate()
     );
 
-    const lastMonthCategories = await Category.countDocuments({
+    const lastMonthCategory = await Category.countDocuments({
       createdAt: { $gte: oneMonthAgo },
     });
 
     res.status(200).json({
-      categories,
+      category,
       totalCategory,
-      lastMonthCategories,
+      lastMonthCategory,
     });
   } catch (error) {
     next(error);
