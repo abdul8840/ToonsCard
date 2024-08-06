@@ -59,6 +59,17 @@ export default function DashSidebar() {
               </Sidebar.Item>
             </Link>
           )}
+          {currentUser.isAdmin && (
+            <Link to='/dashboard?tab=posts'>
+              <Sidebar.Item
+                active={tab === 'posts'}
+                icon={HiDocumentText}
+                as='div'
+              >
+                Posts
+              </Sidebar.Item>
+            </Link>
+          )}
           <Sidebar.Item
             icon={HiArrowSmRight}
             className='cursor-pointer'
