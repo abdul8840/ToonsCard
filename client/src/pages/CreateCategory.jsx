@@ -74,7 +74,7 @@ export default function CreateCategory() {
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/category`);
+        navigate(`/dashboard?tab=category`);
       }
     } catch (error) {
       setPublishError('Something went wrong');

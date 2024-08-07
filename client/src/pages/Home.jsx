@@ -47,15 +47,15 @@ const Home = () => {
       </div>
       <div className='max-w-6xl mx-auto p-3'>
       
-      <div className="flex flex-wrap my-5 gap-4">
+      <div className="flex flex-wrap my-5 gap-4 justify-center md:justify-between">
         {categories.length > 0 ? ( // Check if there are categories to display
           categories.map((category) => (
             <div
               key={category._id}
-              className="w-[300px] border-2 border-slate-500 rounded-md p-2"
+              className="w-[260px] border-2 border-slate-500 rounded-md p-2"
               onClick={() => handleCategoryClick(category._id)}
             >
-              <img src={category.image} alt={category.name} className='h-[150px] object-cover rounded-md' />
+              <img src={category.image} alt={category.name} className='w-full h-[150px] object-cover rounded-md' />
               <h2 className='text-slate-600 font-semibold text-xl mt-2'>{category.name}</h2>
             </div>
           ))
@@ -82,6 +82,9 @@ const Home = () => {
                     <div className="card-bg">
                         <img src={post.image} className='w-full h-[200px] object-contain' alt="" />
                     </div>
+                    <div className="block">
+                      <p className='text-sm border-2 rounded-md border-slate-500 p-1'>{post.description}</p>
+                    </div>
                     <div className="flex flex-wrap mt-2 gap-2 justify-center">
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Category : </span>{post.category}</p>
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Height : </span>{post.height}</p>
@@ -95,6 +98,8 @@ const Home = () => {
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Speed : </span>{post.Speed}</p>
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Attack : </span>{post.attack}</p>
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Defence : </span>{post.defense}</p>
+
+                    
                     </div>
                 </div>
               ))}

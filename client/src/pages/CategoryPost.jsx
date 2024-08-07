@@ -27,6 +27,9 @@ export default function CategoryPost() {
                     <div className="card-bg">
                         <img src={post.image} className='w-full h-[200px] object-contain' alt="" />
                     </div>
+                    <div className="block">
+                      <p className='text-sm border-2 rounded-md border-slate-500 p-1'>{post.description}</p>
+                    </div>
                     <div className="flex flex-wrap mt-2 gap-2 justify-center">
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Category : </span>{post.category}</p>
                     <p className='text-sm border-2 rounded-md border-slate-500 p-1'><span className='font-semibold text-slate-600'>Height : </span>{post.height}</p>
