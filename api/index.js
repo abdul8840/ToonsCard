@@ -6,8 +6,11 @@ import userRoutes from './routes/user.route.js';
 import postRoutes from './routes/post.route.js'
 import categoryRoutes from './routes/category.route.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 dotenv.config();
+
+const __dirname = path.resolve();
 
 mongoose.connect(process.env.MONGO).then(() => {
     console.log('Mongodb is connected')
@@ -29,15 +32,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/post', postRoutes);
-app.get('/api/post/getPostsByCategory/:categoryId', async (req, res) => {
-  const { categoryId } = req.params;
-  
-  try {
-    const posts = await Post.find({ categoryId });  // Fetch posts by categoryId
-    res.json({ posts });
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching posts' });
-  }
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
 app.use((err, req, res, next) => {
