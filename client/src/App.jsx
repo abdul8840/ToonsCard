@@ -13,6 +13,7 @@ import CreatePost from './pages/CreatePost';
 import CreateCategory from './pages/CreateCategory';
 import UpdatePost from './pages/UpdatePost';
 import CategoryPost from './pages/CategoryPost';
+import Search from './pages/Search';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='/update-post/:postId' element={<UpdatePost />} />
       </Route>
       <Route path='/all-cards' element={<AllCards />} />
+      <Route path='/search' element={<Search />} />
       <Route path='/category/:categoryId' element={<CategoryPost />} />
     </Routes>
     </BrowserRouter>
