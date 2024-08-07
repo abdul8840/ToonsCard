@@ -34,6 +34,7 @@ export const getposts = async (req, res, next) => {
     const posts = await Post.find({
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.slug && { slug: req.query.slug }),
+      ...(req.query.category && { category: req.query.category }),
       ...(req.query.postId && { _id: req.query.postId }),
       ...(req.query.searchTerm && {
         $or: [
@@ -110,5 +111,19 @@ export const updatepost = async (req, res, next) => {
     res.status(200).json(updatedPost);
   } catch (error) {
     next(error);
+  }
+};
+
+export const getpost = async (req, res, next) => {
+  try {
+    const posts = await Post.find().sort({
+      createdAt: -1
+    });
+    res.status(200).json(posts);
+    
+    
+  } catch (error) {
+    next(error)
+    
   }
 };

@@ -100,7 +100,7 @@ export default function UpdatePost() {
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/ashboard?tab=posts`);
+        navigate(`/dashboard?tab=posts`);
       }
     } catch (error) {
       setPublishError('Something went wrong');

@@ -12,6 +12,7 @@ import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
 import CreatePost from './pages/CreatePost';
 import CreateCategory from './pages/CreateCategory';
 import UpdatePost from './pages/UpdatePost';
+import CategoryPost from './pages/CategoryPost';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/update-post/:postId' element={<UpdatePost />} />
       </Route>
       <Route path='/all-cards' element={<AllCards />} />
+      <Route path='/category/:categoryId' element={<CategoryPost />} />
     </Routes>
     </BrowserRouter>
   )

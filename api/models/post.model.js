@@ -21,14 +21,17 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     category:{
-      type:String,
-      required:true,
+      type: String,
+      required: true,
     },
     description:{
       type:String,
       required:true,
     },
     height: {
+      type: String,
+    },
+    weight: {
       type: String,
     },
     gender: {

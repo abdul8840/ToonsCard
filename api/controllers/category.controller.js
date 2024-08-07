@@ -68,3 +68,17 @@ export const deletecategory = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getcategories = async (req, res, next) => {
+  try {
+    const category = await Category.find().sort({
+      createdAt: -1
+    });
+    res.status(200).json(category);
+    
+    
+  } catch (error) {
+    next(error)
+    
+  }
+};

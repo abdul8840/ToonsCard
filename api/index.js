@@ -29,6 +29,16 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/post', postRoutes);
+app.get('/api/post/getPostsByCategory/:categoryId', async (req, res) => {
+  const { categoryId } = req.params;
+  
+  try {
+    const posts = await Post.find({ categoryId });  // Fetch posts by categoryId
+    res.json({ posts });
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching posts' });
+  }
+});
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
