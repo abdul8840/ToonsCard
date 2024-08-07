@@ -17,7 +17,7 @@ export default function CategoryPost() {
   return (
     <div>
       <div className='max-w-6xl mx-auto p-3'>
-        <h1 className='text-3xl my-6 text-center text-slate-600 font-bold'>All Cards</h1>
+        <h1 className='text-3xl my-6 text-center text-slate-600 font-bold'>Category</h1>
         {posts && posts.length > 0 && (
           <div className='flex flex-col gap-6'>
             <div className='flex flex-wrap gap-4 justify-center'>
