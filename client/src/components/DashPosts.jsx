@@ -63,10 +63,9 @@ export default function DashPosts() {
           <Table hoverable className='shadow-md'>
             <Table.Head>
               <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Car Names</Table.HeadCell>
-              <Table.HeadCell>Price</Table.HeadCell>
-              <Table.HeadCell>Manufacture Year</Table.HeadCell>
+              <Table.HeadCell>Character image</Table.HeadCell>
+              <Table.HeadCell>Character Names</Table.HeadCell>
+              <Table.HeadCell>Category</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
               <Table.HeadCell>
                 <span>Edit</span>
@@ -95,8 +94,7 @@ export default function DashPosts() {
                       {post.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.price}</Table.Cell>
-                  <Table.Cell>{post.mYear}</Table.Cell>
+                  <Table.Cell>{post.category}</Table.Cell>
                   <Table.Cell>
                   <span
                       onClick={() => {

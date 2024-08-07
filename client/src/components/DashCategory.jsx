@@ -95,7 +95,7 @@ export default function DashCategory() {
                     <span onClick={() => {
                         setShowModal(true);
                         setCategoryIdToDelete(category._id);
-                      }}>
+                      }} className='font-medium text-red-500 hover:underline cursor-pointer'>
                       Delete
                     </span>
                   </Table.Cell>

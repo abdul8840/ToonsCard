@@ -8,8 +8,15 @@ export const create = async (req, res, next) => {
   if (!req.body.name) {
     return next(errorHandler(400, 'Please provide all required fields'));
   }
+  const slug = req.body.name
+    .split(' ')
+    .join('-')
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9-]/g, '');
+  
   const newCategory = new Category({
     ...req.body,
+    slug,
     userId: req.user.id,
   });
   try {
@@ -25,6 +32,7 @@ export const getcategory = async (req, res, next) => {
     const category = await Category.find().sort({
       createdAt: -1
     });
+    
     const totalCategory = await Category.countDocuments();
 
     const now = new Date();

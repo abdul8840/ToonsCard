@@ -6,23 +6,6 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    brand: {
-        type: String,
-      required: true,
-    },
-    price: {
-        type: String,
-        required: true,
-    },
-    mYear: {
-        type: String,
-        required: true,
-    },
     image: {
       type: String,
       default:
@@ -33,6 +16,46 @@ const postSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
+    category:{
+      type:String,
+      required:true,
+    },
+    description:{
+      type:String,
+      required:true,
+    },
+    height: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    ability: {
+      type: String,
+    },
+    hobbies: {
+      type: String,
+    },
+    faname: {
+      type: String,
+    },
+    hp: {
+      type: String,
+    },
+    speed: {
+      type: String,
+    },
+    attack: {
+      type: String,
+    },
+    defense: {
+      type: String,
+    },
+
   },
   { timestamps: true }
 );

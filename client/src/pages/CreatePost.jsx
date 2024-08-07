@@ -6,12 +6,13 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
+  const [userCategory, setUserCategory] = useState([]);
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
@@ -74,13 +75,32 @@ export default function CreatePost() {
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        navigate(`/dashboard?tab=posts`);
       }
     } catch (error) {
       setPublishError('Something went wrong');
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const res = await fetch(`/api/category/getcategory`);
+        const data = await res.json();
+        console.log('API Response:', data); // Log the response
+        if (res.ok) {
+          setUserCategory(data.category);
+        }
+      } catch (error) {
+        console.log('Error fetching categories:', error.message);
+      }
+    };
+
+      fetchCategory();
+  }, []);
+
+
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
@@ -88,7 +108,7 @@ export default function CreatePost() {
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
             type='text'
-            placeholder='Title'
+            placeholder='Character Name'
             required
             id='title'
             className='flex-1'
@@ -96,41 +116,152 @@ export default function CreatePost() {
               setFormData({ ...formData, title: e.target.value })
             }
           />
-          <TextInput
+          <Select
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
+          >
+            <option value="none">None</option>
+                {userCategory.map((item, index) => (
+                    <option key={index} value={item.name}>{item.name}</option>
+                ))}
+          </Select>
+          
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        <TextInput
             type='text'
-            placeholder='Price'
-            required
-            id='price'
+            placeholder='Height'
+            
+            id='height'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
+              setFormData({ ...formData, height: e.target.value })
+            }
+          />
+          <TextInput
+            type='text'
+            placeholder='Weight'
+            
+            id='weight'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, weight: e.target.value })
+            }
+          />
+          
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        
+        <TextInput
+            type='text'
+            placeholder='Gender'
+            
+            id='gender'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, gender: e.target.value })
+            }
+          />
+          <TextInput
+            type='text'
+            placeholder='Ability'
+            
+            id='ability'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, ability: e.target.value })
+            }
+          />
+          
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        
+        <TextInput
+            type='text'
+            placeholder='Hobbies'
+            
+            id='hobbies'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, hobbies: e.target.value })
+            }
+          />
+          <TextInput
+            type='text'
+            placeholder='Family Name'
+            
+            id='faname'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, faname: e.target.value })
             }
           />
           
         </div>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-          <TextInput
+        
+        <TextInput
             type='text'
-            placeholder='Manufacture Year'
-            required
-            id='mYear'
+            placeholder='HP'
+            
+            id='hp'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, mYear: e.target.value })
+              setFormData({ ...formData, hp: e.target.value })
             }
           />
           <TextInput
             type='text'
-            placeholder='Brand'
-            required
-            id='brand'
+            placeholder='Speed'
+            
+            id='speed'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, brand: e.target.value })
+              setFormData({ ...formData, speed: e.target.value })
             }
           />
           
         </div>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        
+        <TextInput
+            type='text'
+            placeholder='Attack'
+            
+            id='attack'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, attack: e.target.value })
+            }
+          />
+          <TextInput
+            type='text'
+            placeholder='Defense'
+            
+            id='defense'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, defense: e.target.value })
+            }
+          />
+          
+        </div>
+        <Textarea
+            type='text'
+            placeholder='About Character'
+            required
+            maxLength={250}
+            id='description'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
+          />
+
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput
             type='file'
