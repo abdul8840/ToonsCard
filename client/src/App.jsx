@@ -33,7 +33,8 @@ const App = () => {
       </Route>
       <Route path='/all-cards' element={<AllCards />} />
       <Route path='/search' element={<Search />} />
-      <Route path='/category/:categoryId' element={<CategoryPost />} />
+      {/* <Route path='/category/:categoryId' element={<CategoryPost />} /> */}
+      <Route path='/category/:categoryName' element={<CategoryPost />} />
     </Routes>
     </BrowserRouter>
   )

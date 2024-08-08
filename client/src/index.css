@@ -6,3 +6,8 @@
     background-image: url('./assets/bg.png');
     background-size: cover;
 }
+
+.hide-scrollbar {
+    overflow: auto;
+    scrollbar-width: none;
+  }

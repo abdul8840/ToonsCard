@@ -69,9 +69,11 @@ export default function Header() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
+      <Link to='/search'>
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <AiOutlineSearch />
       </Button>
+      </Link>
       <div className="flex items-center gap-2">
       <Button
           className='w-12 h-10 hidden sm:inline'
@@ -106,9 +108,6 @@ export default function Header() {
             </Button>
           </Link>
         )}
-        <Button className="w-12 h-10 lg:hidden" color="gray" pill>
-          <AiOutlineSearch />
-        </Button>
       </div>
     </Navbar>
   );

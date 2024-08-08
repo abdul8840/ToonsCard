@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Hero from '../components/Hero';
 
 const Home = () => {
-  const [categories, setCategories] = useState([]); // Initialize as an empty array
+  const [categories, setCategories] = useState([]); 
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const Home = () => {
         const response = await fetch('/api/category/getcategories');
         const data = await response.json();
         
-        if (Array.isArray(data)) { // Ensure data is an array
+        if (Array.isArray(data)) { 
           setCategories(data);
         } else {
           console.error('Unexpected response format', data);
@@ -36,27 +36,41 @@ const Home = () => {
     fetchPosts();
   }, []);
 
-  const handleCategoryClick = (categoryId) => {
-    navigate(`/category/${categoryId}`);
-  };
+  const filtercategory = posts.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = item.image;
+    }
+    return acc;
+  }, {});
+
+  const categoryList = categories.map(category => ({
+    category: category.name,
+    image: categories[category.image] || category.image
+  }));
 
   return (
     <div className="">
       <Hero />
+
       <div className='p-3 bg-amber-100 dark:bg-slate-700'>
       </div>
       <div className='max-w-6xl mx-auto p-3'>
       
-      <div className="flex flex-wrap my-5 gap-4 justify-center md:justify-between">
-        {categories.length > 0 ? ( // Check if there are categories to display
-          categories.map((category) => (
+      <div className="flex my-5 gap-4 overflow-scroll hide-scrollbar">
+        {categoryList.length > 0 ? ( 
+          categoryList.map(({ category, image }) => (
             <div
-              key={category._id}
-              className="w-[260px] border-2 border-slate-500 rounded-md p-2"
-              onClick={() => handleCategoryClick(category._id)}
+              key={category}
+              className="min-w-[260px] border-2 border-slate-500 rounded-md p-2"
             >
-              <img src={category.image} alt={category.name} className='w-full h-[150px] object-cover rounded-md' />
-              <h2 className='text-slate-600 font-semibold text-xl mt-2'>{category.name}</h2>
+              <Link to={`/category/${category}`}>
+              <img
+                src={`${image}?t=${new Date().getTime()}`}
+                alt={category}
+                className='w-full h-[150px] object-cover'
+              />
+              <p className='mt-2 font-bold text-slate-600'>{category}</p>
+            </Link>
             </div>
           ))
         ) : (
