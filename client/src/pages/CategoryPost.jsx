@@ -23,7 +23,7 @@ export default function CategoryPost() {
   return (
     <div>
       <div className='max-w-6xl mx-auto p-3'>
-        {Posts && Posts.length > 0 && (
+        {Posts && Posts.length > 0 ? (
           <div className='flex flex-col gap-6'>
             <h1 className='text-3xl my-6 text-center text-slate-600 font-bold'>Category : {categoryName}</h1>
             <div className='flex flex-wrap gap-4 justify-center'>
@@ -54,6 +54,8 @@ export default function CategoryPost() {
               ))}
             </div>
           </div>
+        ):(
+          <p>No Cards Available in {categoryName}</p>
         )}
       </div>
 
