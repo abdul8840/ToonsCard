@@ -29,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch(`/api/post/getposts?limit=16`);
+      const res = await fetch(`/api/post/getposts?limit=15`);
       const data = await res.json();
       setPosts(data.posts);
     };

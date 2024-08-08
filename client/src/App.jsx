@@ -14,6 +14,7 @@ import CreateCategory from './pages/CreateCategory';
 import UpdatePost from './pages/UpdatePost';
 import CategoryPost from './pages/CategoryPost';
 import Search from './pages/Search';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
       {/* <Route path='/category/:categoryId' element={<CategoryPost />} /> */}
       <Route path='/category/:categoryName' element={<CategoryPost />} />
     </Routes>
+    <Footer />
     </BrowserRouter>
   )
 }
