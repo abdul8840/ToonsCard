@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Dora from '../assets/doraemon_family.jpg'
 import Poke from '../assets/pokemon_family.jpg'
 import Hattori from '../assets/hattori_family.jpg'
+import Trans from '../assets/trans_family.jpg'
+import Httyd from '../assets/httyd_family.jpg'
 
 const images = [
   Dora,
   Poke,
   Hattori,
+  Trans,
+  Httyd
 ];
 
 const Hero = () => {
@@ -16,7 +20,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function AllCards() {
     const [posts, setPosts] = useState([]);
+    const [totalPosts, setTotalPosts] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -10,6 +11,7 @@ export default function AllCards() {
           const res = await fetch(`/api/post/getposts`);
           const data = await res.json();
           setPosts(data.posts);
+          setTotalPosts(data.totalPosts)
         };
         fetchPosts();
       }, []);
@@ -17,7 +19,7 @@ export default function AllCards() {
   return (
     <div>
       <div className='max-w-6xl mx-auto p-3'>
-        <h1 className='text-3xl my-6 text-center text-slate-600 font-bold'>All Cards</h1>
+        <h1 className='text-3xl my-6 text-center text-slate-600 font-bold'>All [{totalPosts}] Cards</h1>
         {posts && posts.length > 0 && (
           <div className='flex flex-col gap-6'>
             <div className='flex flex-wrap gap-4 justify-center'>
